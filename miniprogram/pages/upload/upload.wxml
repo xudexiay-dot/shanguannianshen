@@ -1,0 +1,137 @@
+<scroll-view class="page" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- 步骤指示器 -->
+  <view class="steps">
+    <view class="step {{currentStep >= 1 ? 'active' : ''}}">
+      <view class="step-dot {{currentStep >= 1 ? 'dot-active' : ''}}">
+        <text wx:if="{{currentStep > 1}}">✓</text><text wx:else>1</text>
+      </view>
+      <text class="step-label {{currentStep >= 1 ? 'label-active' : ''}}">上传文档</text>
+    </view>
+    <view class="step-line {{currentStep >= 2 ? 'line-active' : ''}}"></view>
+    <view class="step {{currentStep >= 2 ? 'active' : ''}}">
+      <view class="step-dot {{currentStep >= 2 ? 'dot-active' : ''}}">
+        <text wx:if="{{currentStep > 2}}">✓</text><text wx:else>2</text>
+      </view>
+      <text class="step-label {{currentStep >= 2 ? 'label-active' : ''}}">系统校验</text>
+    </view>
+    <view class="step-line {{currentStep >= 3 ? 'line-active' : ''}}"></view>
+    <view class="step {{currentStep >= 3 ? 'active' : ''}}">
+      <view class="step-dot {{currentStep >= 3 ? 'dot-active' : ''}}"><text>3</text></view>
+      <text class="step-label {{currentStep >= 3 ? 'label-active' : ''}}">初审结果</text>
+    </view>
+  </view>
+
+  <!-- 社团名称 -->
+  <view class="club-input-card">
+    <text class="club-label">社团名称</text>
+    <input class="club-input" placeholder="请输入社团名称（每次必填）" value="{{clubName}}" bindinput="onClubNameInput" maxlength="30" />
+  </view>
+
+  <!-- ====== 步骤1：上传 ====== -->
+  <block wx:if="{{!file}}">
+    <view class="upload-zone" bindtap="onChooseFile">
+      <view class="upload-icon">📤</view>
+      <text class="upload-title">点击上传年审文档</text>
+      <text class="upload-hint">仅支持 .doc / .docx 格式，大小不超过 5M</text>
+    </view>
+  </block>
+
+  <!-- 已选文件 -->
+  <view wx:if="{{file && !validationDone}}" class="file-card card">
+    <view class="file-left">
+      <view class="file-icon">📄</view>
+      <view>
+        <text class="file-name">{{file.name}}</text>
+        <text class="file-size">{{file.size}}{{isUploading ? ' · 上传中…' : ''}}</text>
+      </view>
+    </view>
+    <button wx:if="{{!isUploading}}" class="btn-upload" bindtap="startValidation">开始校验</button>
+  </view>
+
+  <!-- ====== 步骤2：校验结果（批注式） ====== -->
+  <block wx:if="{{validationDone}}">
+    <!-- 文件信息 -->
+    <view class="file-card card" style="margin-bottom:24rpx">
+      <view class="file-left">
+        <view class="file-icon">📄</view>
+        <view>
+          <text class="file-name">{{file.name}}</text>
+          <text class="file-size">{{file.size}}</text>
+        </view>
+      </view>
+      <view class="badge badge-warning" wx:if="{{validationErrors.length > 0}}">{{validationErrors.length}}处问题</view>
+      <view class="badge badge-success" wx:else>合格</view>
+    </view>
+
+    <!-- 逐条批注卡片 -->
+    <view wx:if="{{validationErrors.length > 0}}" class="anno-section-title">📝 校验批注 — 请按以下标注逐条修改</view>
+
+    <block wx:for="{{validationErrors}}" wx:key="index">
+      <view class="anno-card {{item.type === 'error' ? 'anno-error' : 'anno-warn'}}">
+        <!-- 错误编号 + 标题 -->
+        <view class="anno-head">
+          <view class="anno-badge {{item.type === 'error' ? 'badge-red' : 'badge-yellow'}}">
+            <text>{{item.type === 'error' ? '错误' : '提醒'}}{{index + 1}}</text>
+          </view>
+          <text class="anno-title">{{item.title}}</text>
+        </view>
+
+        <!-- 位置标注区域——模拟圈画效果 -->
+        <view class="anno-location">
+          <text class="anno-tag">📍 位置</text>
+          <text class="anno-loc-text">{{item.location}}</text>
+        </view>
+
+        <!-- 错误文本高亮 -->
+        <view class="anno-highlight">
+          <text class="anno-label">❌ 当前：</text>
+          <text class="anno-wrong">{{item.detail}}</text>
+        </view>
+
+        <!-- 修改建议 -->
+        <view class="anno-fix">
+          <text class="anno-label">✅ 应改为：</text>
+          <text class="anno-right">{{item.expected}}</text>
+        </view>
+
+        <!-- 操作指引 -->
+        <view class="anno-guide">
+          <text class="guide-icon">💡</text>
+          <text class="guide-text">{{item.suggestion}}</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 全部通过 -->
+    <view wx:if="{{validationErrors.length === 0}}" class="all-pass">
+      <text class="pass-icon">🎉</text>
+      <text class="pass-title">校验合格！</text>
+      <text class="pass-desc">文档格式符合要求，可以确认提交</text>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-row">
+      <button class="btn-outline flex-1" bindtap="onTapReupload">重新上传</button>
+      <button class="btn-primary flex-1" bindtap="onTapSubmit">确认提交</button>
+    </view>
+  </block>
+
+  <!-- 校验规则速查 -->
+  <view class="rules-card">
+    <text class="rules-title">📋 格式标准速查</text>
+    <view class="rules-list">
+      <text class="rule-item rule-cat">【标题】</text>
+      <text class="rule-item">封面大标题：方正小标宋简体 小初</text>
+      <text class="rule-item">章节标题：方正小标宋简体 二号</text>
+      <text class="rule-item rule-cat">【正文】</text>
+      <text class="rule-item">正文内容：仿宋_GB2312 小四</text>
+      <text class="rule-item">表格/签名/日期：仿宋_GB2312 小四</text>
+      <text class="rule-item">意见栏标题：仿宋_GB2312 四号</text>
+      <text class="rule-item rule-cat">【规则】</text>
+      <text class="rule-item">成员名单单独分页 | 签名日期电子版留空</text>
+      <text class="rule-item rule-warn">🚫 私章直接判定违规</text>
+    </view>
+  </view>
+
+  <view class="bottom-safe"></view>
+</scroll-view>

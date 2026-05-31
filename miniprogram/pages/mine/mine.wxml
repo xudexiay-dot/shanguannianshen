@@ -1,0 +1,89 @@
+<scroll-view class="page" scroll-y enhanced show-scrollbar="{{false}}">
+
+  <!-- ========== 未登录状态 ========== -->
+  <block wx:if="{{!isLoggedIn}}">
+    <view class="login-banner">
+      <view class="logo-circle">
+        <text class="logo-text">社</text>
+      </view>
+      <text class="welcome-title">山管社联年审</text>
+      <text class="welcome-desc">2026 学年社团年审管理系统</text>
+      <button class="login-btn" bindtap="onTapLogin">微信一键登录</button>
+    </view>
+  </block>
+
+  <!-- ========== 已登录状态 ========== -->
+  <block wx:else>
+    <!-- 个人信息卡片 -->
+    <view class="profile-card">
+      <view class="profile-row">
+        <view class="avatar">
+          <text class="avatar-text">{{userInfo.nickName[0]}}</text>
+        </view>
+        <view class="profile-info">
+          <text class="profile-name">{{userInfo.nickName}}</text>
+          <view class="profile-tags">
+            <text class="tag">{{userInfo.role}}</text>
+            <text class="tag">{{userInfo.orgName}}</text>
+          </view>
+        </view>
+        <text class="profile-arrow">›</text>
+      </view>
+      <view class="dept-bar">
+        <text class="dept-icon">🏛</text>
+        <text class="dept-text">盖章要求：按归属单位盖章（{{userInfo.deptName}}）</text>
+      </view>
+    </view>
+
+    <!-- 我的年审 -->
+    <view class="section">
+      <text class="section-title">我的年审</text>
+      <view class="review-list">
+        <block wx:for="{{reviewList}}" wx:key="_id">
+          <view class="review-card" bindtap="onTapReview">
+            <view class="review-left">
+              <view class="review-icon icon-{{item.status === 'passed' ? 'success' : 'error'}}">
+                <text>{{item.status === 'passed' ? '✅' : '❌'}}</text>
+              </view>
+              <view>
+                <text class="review-name">{{item.clubName}} · V{{item.version}}</text>
+                <text class="review-meta">{{item.fileName}}</text>
+                <text class="review-meta">{{item.submitTime}}</text>
+              </view>
+            </view>
+            <view class="badge badge-{{item.status === 'passed' ? 'success' : 'error'}}">
+              {{item.status === 'passed' ? '已通过' : '未通过'}}
+            </view>
+          </view>
+        </block>
+      </view>
+
+      <!-- 盖章指引卡片 -->
+      <view class="guide-card">
+        <view class="guide-header">
+          <text>📌</text>
+          <text class="guide-title">盖章指引</text>
+        </view>
+        <text class="guide-text">初审通过后，携带纸质版年审表前往归口管理单位盖章。归属单位是谁就找谁盖章。</text>
+      </view>
+    </view>
+
+    <!-- 账号设置 -->
+    <view class="section">
+      <text class="section-title">账号设置</text>
+      <view class="settings-list">
+        <view class="setting-item" bindtap="onTapContact">
+          <text class="setting-text">社联联系方式</text>
+          <text class="setting-arrow">›</text>
+        </view>
+        <view class="setting-divider"></view>
+        <view class="setting-item" bindtap="onTapLogout">
+          <text class="setting-text logout-text">退出登录</text>
+          <text class="setting-arrow logout-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view class="bottom-safe"></view>
+</scroll-view>

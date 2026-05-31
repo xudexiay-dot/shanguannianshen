@@ -1,0 +1,148 @@
+/** app.wxss **/
+
+/* ========== 全局 CSS 变量（通过 page 级覆盖使用） ========== */
+
+page {
+  --color-primary: #2563EB;
+  --color-primary-dark: #1E40AF;
+  --color-campus-blue: #1D4ED8;
+  --color-warn-red: #DC2626;
+  --color-warn-amber: #F59E0B;
+  --color-success-green: #16A34A;
+  --color-bg: #F3F4F6;
+  --color-white: #FFFFFF;
+  --color-text-primary: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
+  --radius-sm: 8rpx;
+  --radius-md: 12rpx;
+  --radius-lg: 16rpx;
+  --radius-xl: 20rpx;
+  --shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+  background-color: var(--color-bg);
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+/* ========== 通用卡片 ========== */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 24rpx;
+  border: 1rpx solid #F3F4F6;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ========== 通用按钮 ========== */
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 24rpx 32rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-primary:active {
+  opacity: 0.85;
+}
+
+.btn-outline {
+  background: var(--color-white);
+  color: var(--color-text-primary);
+  border: 1rpx solid #D1D5DB;
+  border-radius: var(--radius-lg);
+  padding: 24rpx 32rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  text-align: center;
+}
+.btn-outline:active {
+  background: #F9FAFB;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border: none;
+  font-size: 26rpx;
+  padding: 16rpx 24rpx;
+}
+
+/* ========== 状态标签 ========== */
+.badge {
+  display: inline-block;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 9999rpx;
+  font-weight: 700;
+}
+.badge-warning {
+  background: #FEF3C7;
+  color: #92400E;
+}
+.badge-success {
+  background: #D1FAE5;
+  color: #166534;
+}
+.badge-error {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+.badge-info {
+  background: #DBEAFE;
+  color: #1E40AF;
+}
+
+/* ========== 警示条 ========== */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 0 12rpx 12rpx 0;
+  font-size: 24rpx;
+}
+.alert-warn {
+  background: #FFFBEB;
+  border-left: 6rpx solid var(--color-warn-amber);
+}
+.alert-error {
+  background: #FEF2F2;
+  border-left: 6rpx solid var(--color-warn-red);
+}
+.alert-icon {
+  font-size: 32rpx;
+  flex-shrink: 0;
+  margin-top: 2rpx;
+}
+.alert-title {
+  font-weight: 700;
+  font-size: 26rpx;
+  margin-bottom: 4rpx;
+}
+
+/* ========== 分割线 ========== */
+.divider {
+  height: 1rpx;
+  background: #E5E7EB;
+  margin: 24rpx 0;
+}
+
+/* ========== 空状态 ========== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+  color: var(--color-text-muted);
+}

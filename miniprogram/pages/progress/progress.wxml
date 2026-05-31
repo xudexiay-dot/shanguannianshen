@@ -1,0 +1,51 @@
+<scroll-view class="page" scroll-y enhanced show-scrollbar="{{false}}">
+
+  <!-- 文档信息 -->
+  <view class="review-header card">
+    <view class="header-top">
+      <view class="header-info">
+        <text class="header-name">2026年社团年审表</text>
+        <text class="header-meta">篮球协会 · 张三（负责人）</text>
+      </view>
+      <view class="badge badge-warning">审核中</view>
+    </view>
+
+    <!-- 进度时间线 -->
+    <view class="timeline">
+      <block wx:for="{{timeline}}" wx:key="index">
+        <view class="timeline-node {{item.done ? 'done' : ''}} {{item.current ? 'current' : ''}}">
+          <view class="node-dot">
+            <text wx:if="{{item.done}}" class="node-check">✓</text>
+            <view wx:elif="{{item.current}}" class="node-pulse"></view>
+            <text wx:else class="node-num">{{index + 1}}</text>
+          </view>
+          <view class="node-content">
+            <text class="node-title">{{item.title}}</text>
+            <text class="node-time">{{item.time}}</text>
+            <text wx:if="{{item.desc}}" class="node-desc">{{item.desc}}</text>
+          </view>
+          <view wx:if="{{index < timeline.length - 1}}" class="node-line {{item.done ? 'line-done' : ''}}"></view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 系统校验批注 -->
+  <view class="annotations card">
+    <text class="anno-title">📝 系统校验批注</text>
+    <view class="anno-list">
+      <block wx:for="{{annotations}}" wx:key="index">
+        <view class="anno-item {{item.type === 'error' ? 'anno-error' : 'anno-warn'}}">
+          <view class="anno-label {{item.type === 'error' ? 'label-error' : 'label-warn'}}">
+            <text>{{item.label}}</text>
+          </view>
+          <text class="anno-title-text">{{item.title}}</text>
+          <text class="anno-detail">{{item.detail}}</text>
+          <text class="anno-suggestion">💡 建议：{{item.suggestion}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="bottom-safe"></view>
+</scroll-view>

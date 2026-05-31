@@ -1,0 +1,58 @@
+<scroll-view class="page" scroll-y enhanced show-scrollbar="{{false}}">
+
+  <!-- 分类标签 -->
+  <scroll-view class="tabs-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="tabs-row">
+      <view
+        wx:for="{{tabs}}"
+        wx:key="index"
+        class="tab-tag {{activeTab === index ? 'tab-active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onTapTab"
+      >
+        <text>{{item}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 私章核心警示（置顶） -->
+  <view class="seal-warning">
+    <view class="seal-warn-header">
+      <text class="seal-warn-icon">🚫</text>
+      <text class="seal-warn-title">关于社团印章的重要说明</text>
+    </view>
+    <view class="seal-warn-list">
+      <text class="seal-warn-item">• 社团不具有法人资格，不得私自刻制公章</text>
+      <text class="seal-warn-item">• 社团自行制作的印章（含电子章）一律无效</text>
+      <text class="seal-warn-item">• 年审盖章须由归口管理单位加盖官方印章</text>
+          </view>
+  </view>
+
+  <!-- FAQ 列表 -->
+  <view class="faq-section">
+    <!-- 分类标题 -->
+    <block wx:for="{{faqList}}" wx:key="index">
+      <view
+        wx:if="{{activeTab === 0 || item.category === tabs[activeTab]}}"
+        class="faq-card {{item.category === '私章申请' ? 'faq-danger' : ''}}"
+      >
+        <view class="faq-header" data-index="{{index}}" bindtap="onTapFaq">
+          <text class="faq-question">{{item.q}}</text>
+          <text class="faq-arrow {{expandedIndex === index ? 'arrow-up' : ''}}">▾</text>
+        </view>
+        <view wx:if="{{expandedIndex === index}}" class="faq-answer">
+          <text class="faq-answer-text">{{item.a}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 仍不清楚？联系客服 -->
+  <view class="contact-card">
+    <text class="contact-title">🤔 仍有疑问？</text>
+    <text class="contact-desc">联系社联客服，获取盖章、私章等问题的官方解答</text>
+    <button class="btn-contact" bindtap="onTapContact">联系客服</button>
+  </view>
+
+  <view class="bottom-safe"></view>
+</scroll-view>

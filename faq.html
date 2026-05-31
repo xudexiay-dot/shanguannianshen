@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>常见问题 - 山管社联年审</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563EB',
+            'primary-dark': '#1E40AF',
+            'campus-blue': '#1D4ED8',
+            'warn-red': '#DC2626',
+            'success-green': '#16A34A',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #F3F4F6;
+      width: 430px;
+      margin: 0 auto;
+      min-height: 932px;
+      overflow-x: hidden;
+    }
+    details summary { list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- 顶部导航栏（含返回） -->
+  <header class="bg-primary-dark text-white px-4 py-3 flex items-center gap-3 sticky top-0 z-10">
+    <svg class="w-5 h-5 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    <span class="text-lg font-bold tracking-wide">常见问题汇总</span>
+  </header>
+
+  <div class="p-3">
+
+    <!-- 分类标签 -->
+    <div class="flex gap-2 mb-4 overflow-x-auto">
+      <span class="bg-primary text-white text-xs px-3 py-1.5 rounded-full font-bold whitespace-nowrap">全部</span>
+      <span class="bg-white text-gray-600 text-xs px-3 py-1.5 rounded-full whitespace-nowrap border border-gray-200">格式问题</span>
+      <span class="bg-white text-gray-600 text-xs px-3 py-1.5 rounded-full whitespace-nowrap border border-gray-200">分页问题</span>
+      <span class="bg-white text-gray-600 text-xs px-3 py-1.5 rounded-full whitespace-nowrap border border-gray-200">盖章问题</span>
+      <span class="bg-white text-gray-600 text-xs px-3 py-1.5 rounded-full whitespace-nowrap border border-gray-200">私章申请</span>
+    </div>
+
+    <!-- 私章核心警示（置顶） -->
+    <div class="bg-red-50 border-2 border-warn-red rounded-xl p-4 mb-4">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-xl">🚫</span>
+        <span class="font-bold text-base text-red-800">关于社团印章的重要说明</span>
+      </div>
+      <ul class="space-y-1.5 text-xs text-red-700">
+        <li>• 社团不具有法人资格，<strong>不得私自刻制公章</strong></li>
+        <li>• 社团自行制作的印章（含电子章）<strong>一律无效</strong></li>
+        <li>• 年审盖章须由<strong>归口管理单位</strong>加盖官方印章</li>
+      </ul>
+    </div>
+
+    <!-- FAQ 列表 -->
+    <div class="space-y-2">
+
+      <!-- 格式类 -->
+      <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider pt-2">📝 格式问题</h4>
+
+      <details class="bg-white rounded-xl shadow-sm border border-gray-100" open>
+        <summary class="flex items-center justify-between px-4 py-3 cursor-pointer">
+          <span class="text-sm font-bold text-gray-800">年审表正文用什么字体和字号？</span>
+          <svg class="w-4 h-4 text-gray-400 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-4 pb-3">
+          <p class="text-xs text-gray-600 leading-relaxed">正文统一使用<strong>仿宋_GB2312 小四</strong>。章节标题使用<strong>方正小标宋简体 二号</strong>。如电脑未安装对应字体，请在模板下载页获取字体包。</p>
+        </div>
+      </details>
+
+      <details class="bg-white rounded-xl shadow-sm border border-gray-100">
+        <summary class="flex items-center justify-between px-4 py-3 cursor-pointer">
+          <span class="text-sm font-bold text-gray-800">上传后显示字体校验失败怎么办？</span>
+          <svg class="w-4 h-4 text-gray-400 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-4 pb-3">
+          <p class="text-xs text-gray-600 leading-relaxed">请按照批注中的建议修改：全选正文内容→设置字体为"仿宋_GB2312"→设置字号为"小四"。修改后重新上传即可。</p>
+        </div>
+      </details>
+
+      <!-- 分页类 -->
+      <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider pt-2">📄 分页问题</h4>
+
+      <details class="bg-white rounded-xl shadow-sm border border-gray-100">
+        <summary class="flex items-center justify-between px-4 py-3 cursor-pointer">
+          <span class="text-sm font-bold text-gray-800">成员名单如何单独分页？</span>
+          <svg class="w-4 h-4 text-gray-400 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-4 pb-3">
+          <p class="text-xs text-gray-600 leading-relaxed">在成员名单内容前插入分页符：将光标放在名单标题前→按<strong>Ctrl+Enter</strong>（或菜单栏"插入→分页"）。确保名单从新的一页开始。</p>
+        </div>
+      </details>
+
+      <!-- 盖章类 -->
+      <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider pt-2">🔖 盖章问题</h4>
+
+      <details class="bg-white rounded-xl shadow-sm border border-gray-100">
+        <summary class="flex items-center justify-between px-4 py-3 cursor-pointer">
+          <span class="text-sm font-bold text-gray-800">我的社团应该找哪个部门盖章？</span>
+          <svg class="w-4 h-4 text-gray-400 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-4 pb-3">
+          <p class="text-xs text-gray-600 leading-relaxed">年审盖章须找<strong>归口管理单位</strong>（即社团的归属单位），归属单位是谁就找谁盖章。例如：体育类社团→体育教学部。具体归属可在"我的"页面查看，如有疑问联系社联确认。</p>
+        </div>
+      </details>
+
+      <details class="bg-white rounded-xl shadow-sm border border-gray-100">
+        <summary class="flex items-center justify-between px-4 py-3 cursor-pointer">
+          <span class="text-sm font-bold text-gray-800">为什么我的年审表没有盖章？</span>
+          <svg class="w-4 h-4 text-gray-400 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-4 pb-3">
+          <p class="text-xs text-gray-600 leading-relaxed">年审为电子版审核流程，电子文档本身不含印章。请先在"进度查询"确认审核是否通过，通过后系统会提示归口盖章部门，再携带纸质版前往对应部门盖章。</p>
+        </div>
+      </details>
+
+      <!-- 私章类 -->
+      <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider pt-2">⛔ 私章申请</h4>
+
+      <details class="bg-white rounded-xl shadow-sm border border-red-200">
+        <summary class="flex items-center justify-between px-4 py-3 cursor-pointer">
+          <span class="text-sm font-bold text-red-800">社团可以自己刻章吗？</span>
+          <svg class="w-4 h-4 text-red-400 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-4 pb-3">
+          <p class="text-xs text-red-700 leading-relaxed"><strong>不可以！</strong>社团不具有法人资格，任何私自刻制的公章或制作的电子印章均无法律效力，年审中将被直接判定为<strong>违规</strong>。请务必通过归口管理单位正规盖章。</p>
+        </div>
+      </details>
+
+      <details class="bg-white rounded-xl shadow-sm border border-red-200">
+        <summary class="flex items-center justify-between px-4 py-3 cursor-pointer">
+          <span class="text-sm font-bold text-red-800">使用电子印章（PS贴图）可以吗？</span>
+          <svg class="w-4 h-4 text-red-400 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-4 pb-3">
+          <p class="text-xs text-red-700 leading-relaxed"><strong>不可以！</strong>任何形式的自制印章（含PS贴图、电子印章图片）均属私章范畴，系统校验将直接提示违规，年审不予通过。</p>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- 仍不清楚？联系客服 -->
+    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mt-4 text-center">
+      <p class="text-sm text-blue-800 font-bold mb-2">🤔 仍有疑问？</p>
+      <p class="text-xs text-blue-700 mb-3">联系社联客服，获取盖章、私章等问题的官方解答</p>
+      <button class="bg-primary text-white text-sm px-6 py-2 rounded-full font-bold">联系客服</button>
+    </div>
+
+  </div>
+
+</body>
+</html>

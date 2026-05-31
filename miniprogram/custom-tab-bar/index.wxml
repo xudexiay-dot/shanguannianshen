@@ -1,0 +1,22 @@
+<view class="tab-bar">
+  <view
+    wx:for="{{list}}"
+    wx:key="index"
+    class="tab-item {{selected === index ? 'tab-item-active' : ''}}"
+    data-index="{{index}}"
+    data-path="{{item.pagePath}}"
+    bindtap="switchTab"
+  >
+    <!-- 首页图标 -->
+    <view wx:if="{{index === 0}}" class="tab-icon">
+      <view wx:if="{{selected === 0}}" class="icon-home-active"></view>
+      <view wx:else class="icon-home"></view>
+    </view>
+    <!-- 我的图标 -->
+    <view wx:else class="tab-icon">
+      <view wx:if="{{selected === 1}}" class="icon-user-active"></view>
+      <view wx:else class="icon-user"></view>
+    </view>
+    <text class="tab-text">{{item.text}}</text>
+  </view>
+</view>

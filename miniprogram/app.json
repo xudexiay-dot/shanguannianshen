@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/hall/hall",
+    "pages/mine/mine",
+    "pages/upload/upload",
+    "pages/review-table/review-table",
+    "pages/faq/faq",
+    "pages/login/login"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1E40AF",
+    "navigationBarTitleText": "山管社联年审",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F3F4F6"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#1E40AF",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/hall/hall",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "lazyCodeLoading": "requiredComponents"
+}

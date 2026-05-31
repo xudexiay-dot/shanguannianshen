@@ -1,0 +1,145 @@
+<scroll-view class="page" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- 年审公告横幅 -->
+  <view class="banner">
+    <view class="banner-header">
+      <text class="banner-icon">📢</text>
+      <text class="banner-title">{{year}} 年审公告</text>
+    </view>
+    <text class="banner-text">⏱ 年审时间：{{dateStart}} — {{dateEnd}}</text>
+    <text class="banner-text">📋 请各社团负责人按时提交年审材料</text>
+  </view>
+
+  <!-- 🔴 重要提醒 -->
+  <view class="section">
+    <text class="section-title">📌 重要提醒</text>
+
+    <!-- 签名与日期：电子版留空 -->
+    <view class="remind-card remind-red">
+      <view class="remind-header">
+        <text class="remind-icon">✍️</text>
+        <text class="remind-title">签名与日期 — 电子版必须留空！</text>
+      </view>
+      <view class="remind-body">
+        <text class="remind-item"><text class="remind-bold">社团工作报告</text>中的<text class="remind-bold">负责人签名、日期</text>，电子版一律空着不填。</text>
+        <text class="remind-item"><text class="remind-bold">指导老师意见栏</text>的<text class="remind-bold">老师签名、日期</text>，电子版同样留空。</text>
+        <view class="remind-highlight">
+          <text>⚠️ 审查通过后，打印纸质版再<text class="remind-bold">手写签名</text>，电子版提前填写视为无效！</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 其中指导老师意见 -->
+    <view class="remind-card remind-blue">
+      <view class="remind-header">
+        <text class="remind-icon">👨‍🏫</text>
+        <text class="remind-title">其中指导老师意见（共两条）</text>
+      </view>
+      <view class="remind-body">
+        <view class="advisor-rule">
+          <view class="advisor-num">①</view>
+          <view class="advisor-content">
+            <text class="remind-item">第一条：只签<text class="remind-bold">"同意"</text>，无需盖章。</text>
+          </view>
+        </view>
+        <view class="advisor-rule">
+          <view class="advisor-num">②</view>
+          <view class="advisor-content">
+            <text class="remind-item">第二条：<text class="remind-bold">签字 + 盖章</text>，印章为<text class="remind-bold">社团所属指导单位公章</text>。</text>
+            <text class="remind-sub">（例如：体育类社团→体育教学部盖章。具体请以自己社团的归属单位为准）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 盖章重点提醒 -->
+    <view class="alert alert-warn">
+      <text class="alert-icon">⚠️</text>
+      <view>
+        <text class="alert-title warn-text">盖章重点提醒</text>
+        <text class="alert-desc warn-desc">年审表盖章看指导老师的归属单位，指导老师是哪个单位就盖哪个单位的章。</text>
+      </view>
+    </view>
+
+    <!-- 私章无效警示 -->
+    <view class="alert alert-error">
+      <text class="alert-icon">🚫</text>
+      <view>
+        <text class="alert-title error-text">私章无效警示</text>
+        <text class="alert-desc error-desc">社团不得私自申请专属公章，自制印章在年审中一律无效！</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 核心功能入口 -->
+  <view class="section">
+    <text class="section-title">核心功能</text>
+    <view class="grid-2col">
+      <view class="func-card" bindtap="onTapUpload">
+        <view class="func-icon icon-blue">
+          <text class="func-icon-text">📤</text>
+        </view>
+        <text class="func-title">文档上传审核</text>
+        <text class="func-desc">doc/docx ≤5M</text>
+      </view>
+
+      <view class="func-card" bindtap="onTapReviewTable">
+        <view class="func-icon icon-purple">
+          <text class="func-icon-text">📊</text>
+        </view>
+        <text class="func-title">审核进度表</text>
+        <text class="func-desc">所有社团审核记录</text>
+      </view>
+
+      <view class="func-card" bindtap="onTapFaq">
+        <view class="func-icon icon-green">
+          <text class="func-icon-text">💬</text>
+        </view>
+        <text class="func-title">常见问题汇总</text>
+        <text class="func-desc">格式·盖章·私章</text>
+      </view>
+
+      <view class="func-card" bindtap="onTapTemplate">
+        <view class="func-icon icon-orange">
+          <text class="func-icon-text">📥</text>
+        </view>
+        <text class="func-title">模板获取</text>
+        <text class="func-desc">联系社联干事获取</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 社团印章须知 -->
+  <view class="section">
+    <view class="tips-card">
+      <view class="tips-header">
+        <text class="tips-icon">📖</text>
+        <text class="tips-title">社团印章须知</text>
+      </view>
+      <text class="tips-text">社团不具有法人资格，不得刻制公章。年审盖章看指导老师的归属单位，指导老师是哪个单位就盖哪个单位的章。</text>
+    </view>
+  </view>
+
+  <!-- 底部信息区 -->
+  <view class="section">
+    <view class="link-list">
+      <view class="link-item" bindtap="onTapContact">
+        <view class="link-left">
+          <text class="link-icon">📞</text>
+          <text class="link-text">社联联系方式</text>
+        </view>
+        <text class="link-arrow">›</text>
+      </view>
+      <view class="link-divider"></view>
+      <view class="link-item" bindtap="onTapDeptList">
+        <view class="link-left">
+          <text class="link-icon">🏛</text>
+          <text class="link-text">盖章说明</text>
+        </view>
+        <text class="link-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="bottom-safe"></view>
+</scroll-view>

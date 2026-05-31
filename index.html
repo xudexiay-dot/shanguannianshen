@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>山管社联年审 - 小程序原型</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563EB',
+            'primary-dark': '#1E40AF',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #E5E7EB;
+    }
+
+    /* iPhone 16 Pro Max 模拟尺寸 */
+    .phone-frame {
+      width: 430px;
+      height: 932px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 3px #1a1a1a,
+        0 0 0 6px #333,
+        0 20px 60px rgba(0, 0, 0, 0.3);
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .phone-frame iframe {
+      width: 430px;
+      height: 932px;
+      border: none;
+      display: block;
+    }
+
+    /* 页面标签 */
+    .page-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      color: #374151;
+    }
+
+    .page-label .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* 滚动容器 */
+    .pages-grid {
+      display: flex;
+      gap: 32px;
+      padding: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .page-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 顶栏 */
+    .top-bar {
+      background: #1E40AF;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+    }
+
+    .top-bar h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .top-bar p {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部信息栏 -->
+  <div class="top-bar">
+    <h1>📱 山管社联年审 · 小程序原型</h1>
+    <p>iPhone 16 Pro Max（430×932）模拟 · 2026 学年年审系统</p>
+  </div>
+
+  <!-- 页面平铺展示区域 -->
+  <div class="pages-grid">
+
+    <!-- 首页 -->
+    <div class="page-col">
+      <div class="page-label">
+        <span class="dot" style="background:#2563EB;"></span>
+        <span class="font-bold text-sm">hall.html — 首页</span>
+      </div>
+      <div class="phone-frame">
+        <iframe src="hall.html" title="首页"></iframe>
+      </div>
+    </div>
+
+    <!-- 我的 -->
+    <div class="page-col">
+      <div class="page-label">
+        <span class="dot" style="background:#16A34A;"></span>
+        <span class="font-bold text-sm">mine.html — 我的（已登录）</span>
+      </div>
+      <div class="phone-frame">
+        <iframe src="mine.html" title="我的"></iframe>
+      </div>
+    </div>
+
+    <!-- 登录 -->
+    <div class="page-col">
+      <div class="page-label">
+        <span class="dot" style="background:#F59E0B;"></span>
+        <span class="font-bold text-sm">login.html — 登录页</span>
+      </div>
+      <div class="phone-frame">
+        <iframe src="login.html" title="登录"></iframe>
+      </div>
+    </div>
+
+    <!-- 文档上传审核 -->
+    <div class="page-col">
+      <div class="page-label">
+        <span class="dot" style="background:#DC2626;"></span>
+        <span class="font-bold text-sm">upload.html — 文档上传审核</span>
+      </div>
+      <div class="phone-frame">
+        <iframe src="upload.html" title="文档上传审核"></iframe>
+      </div>
+    </div>
+
+    <!-- 进度查询 -->
+    <div class="page-col">
+      <div class="page-label">
+        <span class="dot" style="background:#7C3AED;"></span>
+        <span class="font-bold text-sm">progress.html — 进度查询</span>
+      </div>
+      <div class="phone-frame">
+        <iframe src="progress.html" title="进度查询"></iframe>
+      </div>
+    </div>
+
+    <!-- 常见问题 -->
+    <div class="page-col">
+      <div class="page-label">
+        <span class="dot" style="background:#EA580C;"></span>
+        <span class="font-bold text-sm">faq.html — 常见问题汇总</span>
+      </div>
+      <div class="phone-frame">
+        <iframe src="faq.html" title="常见问题"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 底部说明 -->
+  <div class="text-center py-8 text-gray-500 text-xs">
+    <p>原型页面仅供开发参考，不包含真实交互逻辑 · 山东管理学院社团服务管理中心 2026</p>
+  </div>
+
+</body>
+</html>

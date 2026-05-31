@@ -1,0 +1,62 @@
+<scroll-view class="page" scroll-y enhanced show-scrollbar="{{false}}">
+  <view wx:if="{{loading}}" class="loading">加载中…</view>
+
+  <block wx:elif="{{records.length === 0}}">
+    <view class="empty">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text">暂无审核记录</text>
+      <text class="empty-hint">社团上传文档后将在此显示</text>
+    </view>
+  </block>
+
+  <block wx:else>
+    <!-- 汇总 -->
+    <view class="summary">
+      <text class="summary-item">总计 <text class="num">{{records.length}}</text> 条</text>
+      <text class="summary-item">已通过 <text class="num green">{{passedCount}}</text></text>
+      <button class="btn-export" bindtap="onTapExport">📥 导出Excel</button>
+    </view>
+
+    <!-- 表格 -->
+    <scroll-view class="table-wrap" scroll-x enhanced show-scrollbar="{{true}}">
+      <view class="table">
+        <!-- 表头 -->
+        <view class="tr head">
+          <text class="th th-club">社团</text>
+          <text class="th th-ver">版本</text>
+          <text class="th th-time">提交时间</text>
+          <text class="th th-status">状态</text>
+          <text class="th th-err">驳回原因</text>
+          <text class="th th-pass">通过时间</text>
+        </view>
+        <!-- 数据行 -->
+        <block wx:for="{{records}}" wx:key="_id">
+          <view class="tr {{item.status === 'passed' ? 'row-pass' : item.status === 'rejected' ? 'row-reject' : ''}}">
+            <text class="td td-club">{{item.clubName}}</text>
+            <text class="td td-ver">V{{item.version}}</text>
+            <text class="td td-time">{{item.submitTime}}</text>
+            <text class="td td-status">
+              <text class="status-tag {{item.status === 'passed' ? 'tag-pass' : item.status === 'rejected' ? 'tag-reject' : 'tag-pending'}}">
+                {{item.status === 'passed' ? '已通过' : item.status === 'rejected' ? '已驳回' : '待审核'}}
+              </text>
+            </text>
+            <view class="td td-err">
+              <block wx:if="{{item.rejectReason && item.rejectReason.errors}}">
+                <text class="err-summary">【{{item.rejectReason.summary}}】</text>
+                <block wx:for="{{item.rejectReason.errors}}" wx:for-item="e" wx:key="index">
+                  <text class="err-item">❌{{e.title}}：{{e.detail}} → {{e.expected}}</text>
+                  <text class="err-fix">💡{{e.suggestion}}</text>
+                </block>
+              </block>
+              <text wx:elif="{{item.rejectReason && item.rejectReason.summary}}" class="err-summary">{{item.rejectReason.summary}}</text>
+              <text wx:else>-</text>
+            </view>
+            <text class="td td-pass">{{item.passTime || '-'}}</text>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </block>
+
+  <view class="bottom-safe"></view>
+</scroll-view>

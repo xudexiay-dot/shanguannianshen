@@ -1,0 +1,126 @@
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  background: #FFFFFF;
+  display: flex;
+  border-top: 1rpx solid #E5E7EB;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.05);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+}
+
+.tab-text {
+  font-size: 20rpx;
+  color: #999999;
+}
+
+.tab-item-active .tab-text {
+  color: #1E40AF;
+  font-weight: 700;
+}
+
+.tab-icon {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 首页图标 - 未选中 */
+.icon-home {
+  width: 40rpx;
+  height: 40rpx;
+  border: 3rpx solid #999999;
+  border-radius: 6rpx;
+  position: relative;
+}
+.icon-home::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rpx;
+  height: 16rpx;
+  border: 3rpx solid #999999;
+  border-bottom: none;
+  border-radius: 4rpx 4rpx 0 0;
+}
+
+/* 首页图标 - 选中 */
+.icon-home-active {
+  width: 40rpx;
+  height: 40rpx;
+  border: 3rpx solid #1E40AF;
+  border-radius: 6rpx;
+  position: relative;
+  background: rgba(37, 99, 235, 0.1);
+}
+.icon-home-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rpx;
+  height: 16rpx;
+  border: 3rpx solid #1E40AF;
+  border-bottom: none;
+  border-radius: 4rpx 4rpx 0 0;
+  background: rgba(37, 99, 235, 0.15);
+}
+
+/* 我的图标 - 未选中 */
+.icon-user {
+  width: 28rpx;
+  height: 28rpx;
+  border: 3rpx solid #999999;
+  border-radius: 50%;
+  position: relative;
+}
+.icon-user::after {
+  content: '';
+  position: absolute;
+  bottom: -12rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38rpx;
+  height: 20rpx;
+  border: 3rpx solid #999999;
+  border-bottom: none;
+  border-radius: 20rpx 20rpx 0 0;
+}
+
+/* 我的图标 - 选中 */
+.icon-user-active {
+  width: 28rpx;
+  height: 28rpx;
+  border: 3rpx solid #1E40AF;
+  border-radius: 50%;
+  position: relative;
+  background: rgba(37, 99, 235, 0.1);
+}
+.icon-user-active::after {
+  content: '';
+  position: absolute;
+  bottom: -12rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38rpx;
+  height: 20rpx;
+  border: 3rpx solid #1E40AF;
+  border-bottom: none;
+  border-radius: 20rpx 20rpx 0 0;
+}

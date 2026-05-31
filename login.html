@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>登录 - 山管社联年审</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563EB',
+            'primary-dark': '#1E40AF',
+            'campus-blue': '#1D4ED8',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(180deg, #1E40AF 0%, #2563EB 50%, #F3F4F6 50%);
+      width: 430px;
+      margin: 0 auto;
+      min-height: 932px;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo 区域 -->
+  <div class="flex flex-col items-center pt-24 pb-8">
+    <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center text-4xl font-bold text-white border-4 border-white/30 mb-4">
+      社
+    </div>
+    <h1 class="text-2xl font-bold text-white tracking-wider">山管社联年审</h1>
+    <p class="text-sm text-white/70 mt-1">2026 学年社团年审管理系统</p>
+  </div>
+
+  <!-- 登录卡片 -->
+  <div class="mx-4 bg-white rounded-2xl shadow-xl p-6">
+    <h2 class="text-lg font-bold text-gray-800 text-center mb-1">欢迎使用</h2>
+    <p class="text-xs text-gray-500 text-center mb-6">微信一键登录，安全便捷</p>
+
+    <!-- 微信登录按钮 -->
+    <button class="w-full bg-green-500 text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-green-600 transition-colors">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm4.17 4.802c-2.344 0-4.019 1.658-4.019 3.739 0 1.86 1.314 3.114 2.944 3.614a.616.616 0 01.457.066l1.316.728a.235.235 0 00.113.034.2.2 0 00.198-.202.332.332 0 00-.033-.139l-.25-.987a.6.6 0 01.139-.526C17.86 16.035 18 14.797 18 14.466c0-2.06-1.724-3.673-4.232-3.673zm-1.283 1.573c.401 0 .726.343.726.766a.745.745 0 01-.726.766.745.745 0 01-.726-.766c0-.423.325-.766.726-.766zm2.554 0c.4 0 .726.343.726.766a.745.745 0 01-.726.766.745.745 0 01-.726-.766c0-.423.325-.766.726-.766z"/></svg>
+      微信一键登录
+    </button>
+
+    <!-- 用户协议 -->
+    <div class="flex items-center justify-center gap-1 mt-4">
+      <input type="checkbox" id="agree" class="w-3.5 h-3.5" checked />
+      <label for="agree" class="text-xs text-gray-500">
+        已阅读并同意<span class="text-primary cursor-pointer underline">《用户服务协议》</span>和<span class="text-primary cursor-pointer underline">《隐私政策》</span>
+      </label>
+    </div>
+
+    <!-- 分割线 -->
+    <div class="flex items-center gap-3 my-4">
+      <div class="flex-1 h-px bg-gray-200"></div>
+      <span class="text-xs text-gray-400">其他登录方式</span>
+      <div class="flex-1 h-px bg-gray-200"></div>
+    </div>
+
+    <!-- 手机号登录 -->
+    <button class="w-full bg-white border border-gray-300 text-gray-700 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      手机号验证登录
+    </button>
+  </div>
+
+  <!-- 底部说明 -->
+  <p class="text-center text-xs text-gray-400 mt-6 px-4">
+    登录即表示同意服务协议。如遇登录问题请联系社联管理员。
+  </p>
+
+</body>
+</html>

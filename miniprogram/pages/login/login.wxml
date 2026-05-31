@@ -1,0 +1,18 @@
+<view class="page">
+  <view class="back-btn" bindtap="onTapBack">
+    <text class="back-icon">←</text>
+    <text class="back-text">返回首页</text>
+  </view>
+
+  <view class="hero">
+    <view class="hero-logo">
+      <text class="hero-logo-text">社</text>
+    </view>
+    <text class="hero-title">山管社联年审</text>
+    <text class="hero-desc">2026 学年社团年审管理系统</text>
+  </view>
+
+  <view class="login-card">
+    <button class="wechat-btn" bindtap="onTapWechatLogin">微信一键登录</button>
+  </view>
+</view>
