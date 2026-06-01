@@ -16,15 +16,19 @@ Page({
       userInfo: app.globalData.userInfo,
     });
 
-    // 从数据库加载用户自己的审核记录
-    if (app.globalData.isLoggedIn) {
+    // 只加载当前用户上传的记录
+    if (app.globalData.isLoggedIn && app.globalData.userInfo?._openid) {
       const db = wx.cloud.database();
       db.collection('review_records')
-        .orderBy('submitTime', 'desc')
+        .where({ _openid: app.globalData.userInfo._openid })
         .limit(5)
         .get()
         .then((res: any) => {
-          this.setData({ reviewList: res.data || [] });
+          // 按提交时间降序排列
+          const list = (res.data || []).sort((a: any, b: any) =>
+            new Date(b.submitTime).getTime() - new Date(a.submitTime).getTime()
+          );
+          this.setData({ reviewList: list });
         })
         .catch(() => {
           this.setData({ reviewList: [] });

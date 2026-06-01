@@ -44,8 +44,7 @@
         <view class="advisor-rule">
           <view class="advisor-num">②</view>
           <view class="advisor-content">
-            <text class="remind-item">第二条：<text class="remind-bold">签字 + 盖章</text>，印章为<text class="remind-bold">社团所属指导单位公章</text>。</text>
-            <text class="remind-sub">（例如：体育类社团→体育教学部盖章。具体请以自己社团的归属单位为准）</text>
+            <text class="remind-item">第二条：<text class="remind-bold">签字 + 盖章</text>，请根据指导老师所属单位盖章。</text>
           </view>
         </view>
       </view>
@@ -56,7 +55,7 @@
       <text class="alert-icon">⚠️</text>
       <view>
         <text class="alert-title warn-text">盖章重点提醒</text>
-        <text class="alert-desc warn-desc">年审表盖章看指导老师的归属单位，指导老师是哪个单位就盖哪个单位的章。</text>
+        <text class="alert-desc warn-desc">请根据指导老师所属单位盖章。指导老师若为体育教学部，则盖体育教学部章。</text>
       </view>
     </view>
 
@@ -115,7 +114,7 @@
         <text class="tips-icon">📖</text>
         <text class="tips-title">社团印章须知</text>
       </view>
-      <text class="tips-text">社团不具有法人资格，不得刻制公章。年审盖章看指导老师的归属单位，指导老师是哪个单位就盖哪个单位的章。</text>
+      <text class="tips-text">社团不具有法人资格，不得刻制公章。请根据指导老师所属单位盖章。指导老师若为体育教学部，则盖体育教学部章。</text>
     </view>
   </view>
 

@@ -3,8 +3,8 @@ const app = getApp<IAppOption>();
 Page({
   data: {
     year: '2026',
-    dateStart: '5月29日',
-    dateEnd: '6月11日',
+    dateStart: '6月3日',
+    dateEnd: '6月10日',
     isLoggedIn: false,
     userInfo: null as UserInfo | null,
   },
@@ -66,7 +66,7 @@ Page({
   onTapDeptList() {
     wx.showModal({
       title: '盖章说明',
-      content: '年审表盖章看指导老师的归属单位，指导老师是哪个单位就盖哪个单位的章。如有疑问请联系社联确认。',
+      content: '请根据指导老师所属单位盖章。指导老师若为体育教学部，则盖体育教学部章。',
       showCancel: false,
     });
   },

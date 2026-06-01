@@ -28,62 +28,41 @@ Page({
       });
   },
 
-  /** 导出Excel——上传到云存储再下载 */
+  /** 打开/刷新飞书在线表格 */
   onTapExport() {
-    if (this.data.records.length === 0) {
-      wx.showToast({ title: '没有可导出的数据', icon: 'none' });
-      return;
-    }
-
-    wx.showLoading({ title: '生成中…' });
-
-    let csv = '﻿社团,版本,提交时间,状态,驳回原因,通过时间\n';
-    this.data.records.forEach((r: any) => {
-      const reason = r.rejectReason
-        ? (typeof r.rejectReason === 'string' ? r.rejectReason : (r.rejectReason.summary || '')).replace(/,/g, '，')
-        : '';
-      const passTime = r.passTime ? r.passTime : '';
-      const statusText = r.status === 'passed' ? '已通过' : r.status === 'rejected' ? '未通过' : '待审核';
-      csv += `${r.clubName},V${r.version},${r.submitTime},${statusText},"${reason}",${passTime}\n`;
-    });
-
-    // 上传 CSV 到云存储
-    const cloudPath = `exports/年审进度表_${Date.now()}.csv`;
-    wx.cloud.uploadFile({
-      cloudPath,
-      fileContent: csv,
-      success: (res) => {
+    wx.showLoading({ title: '同步中…' });
+    wx.cloud.callFunction({
+      name: 'syncToBitable',
+      success: (res: any) => {
         wx.hideLoading();
-        // 获取临时下载链接并打开
-        wx.cloud.getTempFileURL({
-          fileList: [res.fileID],
-          success: (tmpRes) => {
-            if (tmpRes.fileList[0].tempFileURL) {
-              wx.showModal({
-                title: '导出成功',
-                content: 'CSV 文件已生成，可用 Excel / WPS 打开。',
-                confirmText: '打开文件',
-                success: (m) => {
-                  if (m.confirm) {
-                    wx.downloadFile({
-                      url: tmpRes.fileList[0].tempFileURL,
-                      success: (dl) => {
-                        wx.openDocument({ filePath: dl.tempFilePath, showMenu: true });
-                      },
-                    });
-                  }
-                },
-              });
-            }
-          },
-          fail: () => {
-            wx.showModal({ title: '导出成功', content: '文件已保存到云存储 exports/ 目录', showCancel: false });
-          },
-        });
+        if (res.result.code === 0) {
+          wx.showToast({ title: '已同步 ' + (res.result.updated || 0) + ' 个社团', icon: 'success' });
+        } else {
+          wx.showToast({ title: res.result.msg || '失败', icon: 'none' });
+        }
       },
-      fail: (err: any) => {
-        wx.hideLoading();
-        wx.showToast({ title: '导出失败: ' + (err.errMsg || ''), icon: 'none' });
+      fail: () => { wx.hideLoading(); wx.showToast({ title: '同步失败', icon: 'none' }); },
+    });
+  },
+
+  /** 长按标题清空测试数据 */
+  onClearData() {
+    wx.showModal({
+      title: '清空测试数据',
+      content: '将删除所有审核记录和存储文件，确认？',
+      confirmColor: '#DC2626',
+      success: (m) => {
+        if (!m.confirm) return;
+        wx.showLoading({ title: '清理中…' });
+        wx.cloud.callFunction({
+          name: 'cleanupTestData',
+          success: () => {
+            wx.hideLoading();
+            wx.showToast({ title: '已清空', icon: 'success' });
+            this.loadRecords();
+          },
+          fail: () => { wx.hideLoading(); wx.showToast({ title: '清理失败', icon: 'none' }); },
+        });
       },
     });
   },

@@ -10,8 +10,8 @@
   </block>
 
   <block wx:else>
-    <!-- 汇总 -->
-    <view class="summary">
+    <!-- 汇总（长按清空测试数据） -->
+    <view class="summary" bindlongpress="onClearData">
       <text class="summary-item">总计 <text class="num">{{records.length}}</text> 条</text>
       <text class="summary-item">已通过 <text class="num green">{{passedCount}}</text></text>
       <button class="btn-export" bindtap="onTapExport">📥 导出Excel</button>

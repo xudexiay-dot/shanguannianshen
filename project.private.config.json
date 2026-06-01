@@ -3,7 +3,7 @@
   "projectname": "%E5%B1%B1%E7%AE%A1%E7%A4%BE%E8%81%94%E5%B9%B4%E5%AE%A1",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": true,
+    "urlCheck": false,
     "coverView": false,
     "lazyloadPlaceholderEnable": false,
     "skylineRenderEnable": true,

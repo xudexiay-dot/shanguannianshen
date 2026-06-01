@@ -4,7 +4,7 @@ Page({
   data: {
     currentStep: 1,
     clubName: '',
-    file: null as { name: string; size: string; path: string } | null,
+    file: null as { name: string; size: string; path: string; rawSize: number } | null,
     isUploading: false,
     validationDone: false,
     validationErrors: [] as any[],
@@ -16,7 +16,7 @@ Page({
       success: (res) => {
         const f = res.tempFiles[0];
         if (f.size > 5 * 1024 * 1024) { wx.showToast({ title: '文件不能超过5M', icon: 'none' }); return; }
-        this.setData({ file: { name: f.name, size: this.fmt(f.size), path: f.path }, isUploading: true });
+        this.setData({ file: { name: f.name, size: this.fmt(f.size), path: f.path, rawSize: f.size }, isUploading: true });
         setTimeout(() => this.setData({ isUploading: false }), 600);
       },
     });
@@ -27,16 +27,39 @@ Page({
   startValidation() {
     this.setData({ currentStep: 2 });
     wx.showLoading({ title: '校验中…' });
-    setTimeout(() => {
-      wx.hideLoading();
-      const errors = [
-        { type: 'error', title: '章节标题字体错误', location: '第2页「社团工作报告」标题行', detail: '标题当前为黑体三号', expected: '方正小标宋简体 二号', suggestion: '在 Word 中选中标题文字 → 字体下拉选"方正小标宋简体" → 字号选"二号" → 确认替换' },
-        { type: 'error', title: '正文字体不对', location: '第2页正文第1段', detail: '正文当前为宋体', expected: '仿宋_GB2312 小四', suggestion: 'Ctrl+A 全选正文 → 字体下拉找到"仿宋_GB2312" → 字号选"小四" → 确认' },
-        { type: 'warn', title: '成员名单未分页', location: '第3页「社员名单」前', detail: '名单紧接在工作报告后面', expected: '成员名单从新页开始', suggestion: '光标放在「社员名单」标题前 → 按 Ctrl+Enter 插入分页符' },
-        { type: 'warn', title: '签名处已填写', location: '第2页底部「负责人签字」栏', detail: '电子版中负责人签名栏有文字', expected: '签名栏留空', suggestion: '把负责人签名删掉 → 日期也删掉 → 审查通过后打印纸质版手写' },
-      ];
-      this.setData({ validationDone: true, validationErrors: errors });
-    }, 2000);
+
+    // 先上传到云存储，再调用云函数真实解析 docx
+    wx.cloud.uploadFile({
+      cloudPath: `temp-check/${Date.now()}.docx`,
+      filePath: this.data.file!.path,
+      success: (upRes) => {
+        wx.cloud.callFunction({
+          name: 'validateDocument',
+          data: { fileID: upRes.fileID },
+          success: (cfRes: any) => {
+            wx.hideLoading();
+            if (cfRes.result.code === 0) {
+              this.setData({
+                validationDone: true,
+                validationErrors: cfRes.result.errors || [],
+              });
+              const count = (cfRes.result.errors || []).length;
+              wx.showToast({ title: count > 0 ? '发现' + count + '处问题' : '校验合格！', icon: 'none' });
+            } else {
+              wx.showToast({ title: '校验失败: ' + cfRes.result.msg, icon: 'none' });
+            }
+          },
+          fail: () => {
+            wx.hideLoading();
+            wx.showToast({ title: '校验服务不可用', icon: 'none' });
+          },
+        });
+      },
+      fail: () => {
+        wx.hideLoading();
+        wx.showToast({ title: '文件上传失败', icon: 'none' });
+      },
+    });
   },
 
   onTapReupload() {
@@ -67,20 +90,20 @@ Page({
         const file = this.data.file!;
 
         // 如果是通过状态，先上传文档到 passed-docs 云端文件夹存档
-        const uploadDoc = (cb: () => void) => {
+        const uploadDoc = (cb: (fileID?: string) => void) => {
           if (!hasErrors) {
             wx.cloud.uploadFile({
               cloudPath: `passed-docs/${clubName}_V${Date.now()}.docx`,
               filePath: file.path,
-              success: () => cb(),
-              fail: () => cb(), // 存档失败不阻塞提交
+              success: (upRes) => cb(upRes.fileID),
+              fail: () => cb(),
             });
           } else {
             cb();
           }
         };
 
-        uploadDoc(() => {
+        uploadDoc((cloudFileID) => {
           db.collection('review_records')
             .where({ clubName })
             .orderBy('version', 'desc').limit(1).get()
@@ -101,11 +124,18 @@ Page({
                   status: hasErrors ? 'rejected' : 'passed',
                   rejectReason,
                   passTime: hasErrors ? null : new Date(),
+                  passedFileID: hasErrors ? '' : (cloudFileID || ''),
                 },
               }).then(() => {
                 wx.hideLoading();
                 const msg = hasErrors ? '已提交 V' + version + '（未通过）' : '已提交 V' + version + '（已通过）';
                 wx.showToast({ title: msg, icon: 'success' });
+                // 同步到飞书表格
+                wx.cloud.callFunction({
+                  name: 'syncToBitable',
+                  success: () => console.log('飞书表格已同步'),
+                  fail: (err: any) => console.error('飞书同步失败:', err),
+                });
                 setTimeout(() => wx.switchTab({ url: '/pages/hall/hall' }), 1500);
             });
           })
@@ -116,7 +146,8 @@ Page({
             } else {
               wx.showToast({ title: '提交失败，请重试', icon: 'none' });
             }
-          });
+            });
+        });
       },
     });
   },

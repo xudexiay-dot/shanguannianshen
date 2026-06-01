@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python *)",
+      "Bash(gh auth *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git rm *)",
+      "Bash(git commit *)",
+      "Bash(git config *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(pip install *)",
+      "Bash(winget install *)",
+      "Bash(curl -L -o \"C:/Program Files/Tesseract-OCR/tessdata/chi_sim.traineddata\" \"https://github.com/tesseract-ocr/tessdata/raw/main/chi_sim.traineddata\")",
+      "Bash(curl -L -o \"C:/Program Files/Tesseract-OCR/tessdata/chi_sim.traineddata\" \"https://mirror.ghproxy.com/https://github.com/tesseract-ocr/tessdata/raw/main/chi_sim.traineddata\")",
+      "Bash(node *)"
+    ]
+  }
+}
